@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fontsource/black-han-sans": "^5.0.19",
+    "@primer/octicons-react": "^19.11.0",
     "better-sqlite3": "^11.2.1",
     "drizzle-kit": "^0.24.1",
     "drizzle-orm": "^0.33.0",

@@ -1,7 +1,7 @@
 export const CardGrid = ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) => {
   return (
     <div style={{
