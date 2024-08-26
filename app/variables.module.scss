@@ -1,0 +1,10 @@
+$primary-color: rgba(51, 51, 255, 1);
+$secondary-color: rgba(51, 51, 255, .7);
+
+$highlight-fonts: 'Black Han Sans', sans-serif;
+
+:export {
+  primaryColor: $primary-color;
+  secondaryColor: $secondary-color;
+  highlightFonts: $highlight-fonts;
+}
