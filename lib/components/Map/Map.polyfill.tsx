@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, CSSProperties } from 'react'
+import { useState, useRef, useEffect, CSSProperties, useImperativeHandle, forwardRef } from 'react'
 import Script from 'next/script'
 import { MapType } from '@/lib/definitions/commons/map'
 import { Position } from '@/lib/definitions/commons/position'
@@ -11,13 +11,22 @@ interface IMap {
   wrapperId?: string,
   center?: Position,
   zoom?: number,
-  wrapperStyle?: CSSProperties
+  wrapperStyle?: CSSProperties,
+  ref?: any
 }
 
-export const Map: React.FC<IMap> = ({ ...props }) => {
+export type MapRef = {
+  createPath: (key: string) => void,
+  getPath: (key: string) => Array<Position>,
+  setPath: (key: string, value: Array<Position>) => void,
+  addPath: (key: string, value: Array<Position> | Position) => void,
+  getCenter: () => naver.maps.LatLng | undefined,
+  setCenter: (coords: Position) => void,
+}
+
+export const Map = forwardRef<MapRef, IMap>((props, ref) => {
   const [mapState, setMapState] = useState<naver.maps.Map>()
   const [pathState, setPathState] = useState<{[key: string]: Array<Position>}>()
-  const ref = useRef()
 
   const wrapperId = props.wrapperId ?? MAP_WRAPPER_ELEMENT_DEFAULT_ID
   const zoom = props.zoom ?? MAP_WRAPPER_POLYFILL_NAVER_INIT_ZOOM
@@ -32,7 +41,7 @@ export const Map: React.FC<IMap> = ({ ...props }) => {
         })
       }
     }
-  })
+  }, [dynCenterEnabled])
 
   const initPath = () => {
     if (pathState === undefined) {
@@ -45,7 +54,7 @@ export const Map: React.FC<IMap> = ({ ...props }) => {
   }
   const getPath = (key: string) => {
     initPath()
-    return pathState![key] = []
+    return pathState![key]
   }
   const setPath = (key: string, value: Array<Position>) => {
     initPath()
@@ -77,6 +86,15 @@ export const Map: React.FC<IMap> = ({ ...props }) => {
     ))
   }
 
+  useImperativeHandle(ref, () => ({
+    createPath,
+    getPath,
+    setPath,
+    addPath,
+    getCenter,
+    setCenter,
+  }), [pathState])
+
   return (
     <>
       {
@@ -93,4 +111,4 @@ export const Map: React.FC<IMap> = ({ ...props }) => {
       ></div>
     </>
   )
-}
+})

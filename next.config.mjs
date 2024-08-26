@@ -1,4 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+// next.config.mjs
+import withLitSSR from '@lit-labs/nextjs';
 
-export default nextConfig;
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Add your own config here
+  reactStrictMode: true,
+  swcMinify: true,
+};
+
+export default withLitSSR()(nextConfig);
