@@ -1,6 +1,6 @@
 import { Header } from '@/lib/components/Header/Header'
 
-const MovingInstanceRunLayout = ({
+const MovingInstanceLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode
@@ -18,4 +18,4 @@ const MovingInstanceRunLayout = ({
     </main>
   )
 }
-export default MovingInstanceRunLayout
+export default MovingInstanceLayout

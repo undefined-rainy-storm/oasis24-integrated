@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@fontsource/black-han-sans": "^5.0.19",
+    "@next/env": "^14.2.6",
     "@primer/octicons-react": "^19.11.0",
+    "@types/navermaps": "^3.7.5",
     "better-sqlite3": "^11.2.1",
     "drizzle-kit": "^0.24.1",
     "drizzle-orm": "^0.33.0",

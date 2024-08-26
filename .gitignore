@@ -2,6 +2,7 @@
 *.db
 .DS_Store
 /drizzle
+.env.development
 
 # dependencies
 /node_modules
