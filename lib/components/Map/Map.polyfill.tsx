@@ -24,11 +24,12 @@ export const Map: React.FC<IMap> = ({ ...props }) => {
   const center: Position = props.center ?? { lat: 35.14770, lng: 126.9119 }
 
   useEffect(() => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(({ coords }) => {
-        console.log(coords)
-        setCenter({ lat: coords.latitude, lng: coords.longitude })
-      })
+    if (dynCenterEnabled) {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(({ coords }) => {
+          setCenter({ lat: coords.latitude, lng: coords.longitude })
+        })
+      }
     }
   })
 
@@ -62,7 +63,7 @@ export const Map: React.FC<IMap> = ({ ...props }) => {
     mapState?.getCenter()
   }
   const setCenter = (coords: Position) => {
-    mapState?.setCenter(new naver.maps.Point(coords.lat, coords.lng))
+    mapState?.setCenter(new naver.maps.LatLng(coords.lat, coords.lng))
   }
 
   const initElementOnLoad = () => {
