@@ -11,7 +11,9 @@ const MovingInstanceLayout = ({
         <Header
           title={'추천 코스'}
         />
-        <div className="w-full h-5/6 rounded-t-2xl bg-white self-end b-0 p-5">
+        <div className="w-full rounded-t-2xl bg-white self-end b-0" style={{
+          height: '100%',
+        }}>
           { children }
         </div>
       </div>

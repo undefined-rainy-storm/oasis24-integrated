@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, CSSProperties } from 'react'
 import Script from 'next/script'
 import { MapType } from '@/lib/definitions/commons/map'
 import { Position } from '@/lib/definitions/commons/position'
@@ -11,6 +11,7 @@ interface IMap {
   wrapperId?: string,
   center?: Position,
   zoom?: number,
+  wrapperStyle?: CSSProperties
 }
 
 export const Map: React.FC<IMap> = ({ ...props }) => {
@@ -87,10 +88,7 @@ export const Map: React.FC<IMap> = ({ ...props }) => {
         />
       }
       <div
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
+        style={props?.wrapperStyle}
         id={wrapperId}
       ></div>
     </>

@@ -10,3 +10,11 @@ export const MovingInstance = sqliteTable('MovingInstance', {
   basePoint: blob('base_point').$type<Position>().notNull(),
   movedPath: blob('moved_path').$type<Array<Position>>(),
 })
+
+export const Sketch = sqliteTable('Sketch', {
+  id: text('id').primaryKey(),
+  name: text('name').notNull(),
+  description: text('description'),
+  basePoint: blob('base_point').$type<Position>().notNull(),
+  polyline: blob('moved_path').$type<Array<Position>>(),
+})

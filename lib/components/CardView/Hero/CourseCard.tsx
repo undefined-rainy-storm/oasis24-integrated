@@ -22,17 +22,17 @@ export const CourseCard = ({ data }: { data: ICourseCard }) => {
   })
   return (
     <Card>
-      <h3>{ data.identify }. { data.name }</h3>
+      <h3>{data.identify}. {data.name}</h3>
       <div className="grid grid-3">
         <table className="table-auto border-spacing-x-2">
           <tbody>
             <tr>
               <td className="border">소요시간</td>
-              <td className="border">{ durationStringState }</td>
+              <td className="border">{durationStringState}</td>
             </tr>
             <tr>
               <td className="border">총 거리</td>
-              <td className="border">{ data.course.length } km</td>
+              <td className="border">{data.course.length} km</td>
             </tr>
           </tbody>
         </table>
