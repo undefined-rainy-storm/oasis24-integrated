@@ -9,22 +9,49 @@ import { Position } from '@/lib/definitions/commons/position'
 import '@/lib/components/Map/Map.lit'
 import { NaverMapReact, NaverMapRef } from '@/lib/components/Map/Map.lit.react'
 import { sketches } from '@/src/dataFixed'
+import { NaverMap } from '@/lib/components/Map/Map.lit'
 
 const MovingInstancePage = () => {
   const mapRef = useRef<NaverMapRef>(null)
+  let element: NaverMap | null
 
+  const init = () => {
+    loadPath()
+    initGeolocationApi()
+  }
   const loadPath = () => {
-    const element = document.querySelector('naver-map')
-    const selected = sketches[0]
-    element.setCenter(selected.basePoint)
-    console.log(selected.basePoint)
-    console.log(element.getCenter())
-    element.addPath('BASE', selected.polyline)
-    console.log(element.getPath('BASE'))
+    element = document.querySelector('naver-map')
+    const selected = sketches[3]
+    element?.setCenter(selected.basePoint)
+    element?.addPath('BASE', selected.polyline)
+  }
+  const initGeolocationApi = () => {
+    element = document.querySelector('naver-map')
+    invokeGeolocationHandler()
+    element?.addPath('LOC_LOG_STACK', [])
+    element?.getPath('LOC_LOG_STACK').setOptions({
+      strokeColor: '#ff0000',
+    })
+  }
+
+  const invokeGeolocationHandler = () => {
+    navigator.geolocation.watchPosition(getGeolocationOnSuccess)
+  }
+  const getGeolocationOnSuccess = (pos: GeolocationPosition) => {
+    const { coords } = pos
+    element?.addPath('LOC_LOG_STACK', { lat: coords.latitude, lng: coords.longitude })
+    element?.setShape('LOC', new naver.maps.Circle({
+      center: { lat: coords.latitude, lng: coords.longitude },
+      radius: 1.5,
+      fillColor: 'red',
+      strokeColor: 'blue'
+    }))
+    element?.setCenter({ lat: coords.latitude, lng: coords.longitude })
   }
 
   useEffect(() => {
-    loadPath()
+    element = document.querySelector('naver-map')
+    init()
   })
 
   return (
@@ -33,7 +60,7 @@ const MovingInstancePage = () => {
     }}>
       <naver-map
         center={{ lat: 37.5665, lng: 126.9780 }}
-        zoom={17}
+        zoom={19}
       />
       {/*
       <NaverMapReact

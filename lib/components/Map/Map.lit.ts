@@ -15,6 +15,7 @@ export class NaverMap extends LitElement {
 
   @state() private mapState?: naver.maps.Map
   @state() private pathState: {[key: string]: naver.maps.Polyline} = {}
+  @state() private shapeState: {[key: string]: naver.maps.AbstractShapeOverlay} = {}
 
   static styles = css`
     :host {
@@ -89,6 +90,16 @@ export class NaverMap extends LitElement {
   setPath(key: string, value: naver.maps.Polyline) {
     this.pathState[key] = value
     this.requestUpdate('pathState')
+  }
+
+  getShape(key: string): naver.maps.AbstractShapeOverlay {
+    return this.shapeState[key]
+  }
+  setShape(key: string, value: naver.maps.AbstractShapeOverlay) {
+    value.setOptions({map: this.mapState})
+    console.log(value)
+    this.shapeState[key] = value
+    this.requestUpdate('shapeState')
   }
 
   addPath(key: string, value: Array<Position> | Position) {
