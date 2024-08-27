@@ -10,7 +10,13 @@ interface IHeader {
 export const Header: React.FC<IHeader> = ({ ...props }) => {
   const router = useRouter()
   return (
-    <div className="h-1/7 flex flex-row items-center justify-center">
+    <div className="h-1/7 flex flex-row items-center justify-center" style={{
+      width: '100vw',
+      position: 'fixed',
+      top: 0,
+      zIndex: 10,
+      backgroundColor: '#fff',
+    }}>
       <div className="flex flex-row justify-start align-center m-8" style={{
         flex: .3,
         paddingLeft: '1em',
