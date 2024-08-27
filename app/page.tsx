@@ -1,13 +1,10 @@
 import Image from 'next/image'
 import variables from '@/app/variables.module.scss'
-import { db } from '@/lib/drizzle/drizzle'
-import { MovingInstance } from '@/lib/drizzle/schema'
 import { CardGrid } from '@/lib/components/CardView/CardGrid'
 import { Card } from '@/lib/components/CardView/Card'
 import { CourseCard } from '@/lib/components/CardView/Hero/CourseCard'
 
 export default function Home() {
-  db.select().from(MovingInstance).all()
   return (
     <main className="flex min-h-screen flex-row-reverse items-center">
       {/* Application Wrapper */}
