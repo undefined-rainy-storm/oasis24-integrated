@@ -6,7 +6,8 @@ const nextConfig = {
   // Add your own config here
   reactStrictMode: true,
   swcMinify: true,
-  typescript: {ignoreBuildErrors: true,}
+  typescript: {ignoreBuildErrors: true,},
+  output: 'standalone'
 };
 
 export default withLitSSR()(nextConfig);
