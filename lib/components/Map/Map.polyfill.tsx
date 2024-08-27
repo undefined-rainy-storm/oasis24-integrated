@@ -112,3 +112,5 @@ export const Map = forwardRef<MapRef, IMap>((props, ref) => {
     </>
   )
 })
+
+Map.displayName = 'MapReact'

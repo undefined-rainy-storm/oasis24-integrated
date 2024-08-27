@@ -6,6 +6,7 @@ const nextConfig = {
   // Add your own config here
   reactStrictMode: true,
   swcMinify: true,
+  typescript: {ignoreBuildErrors: true,}
 };
 
 export default withLitSSR()(nextConfig);

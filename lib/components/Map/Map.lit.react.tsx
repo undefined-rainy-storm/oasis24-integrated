@@ -50,3 +50,5 @@ export const NaverMapReact = forwardRef<NaverMapRef, NaverMapProps>((props, ref)
 
   return <naver-map ref={elementRef as any} />
 })
+
+NaverMapReact.displayName = 'NaverMapReact'

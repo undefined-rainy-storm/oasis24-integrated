@@ -10,6 +10,7 @@ import '@/lib/components/Map/Map.lit'
 import { NaverMapReact, NaverMapRef } from '@/lib/components/Map/Map.lit.react'
 import { sketches } from '@/src/dataFixed'
 import { NaverMap } from '@/lib/components/Map/Map.lit'
+import { v4 as uuid } from 'uuid'
 
 const MovingInstancePage = () => {
   const mapRef = useRef<NaverMapRef>(null)
@@ -29,9 +30,13 @@ const MovingInstancePage = () => {
     element = document.querySelector('naver-map')
     invokeGeolocationHandler()
     element?.addPath('LOC_LOG_STACK', [])
-    element?.getPath('LOC_LOG_STACK').setOptions({
-      strokeColor: '#ff0000',
-    })
+    const path = element?.getPath('LOC_LOG_STACK')
+    if (path) {
+      path.setOptions({
+        path: path.getPath(),
+        strokeColor: '#ff0000',
+      })
+    }
   }
 
   const invokeGeolocationHandler = () => {
@@ -59,6 +64,8 @@ const MovingInstancePage = () => {
       position: 'relative',
     }}>
       <naver-map
+        mapType={MapType.naver}
+        wrapperId={uuid()}
         center={{ lat: 37.5665, lng: 126.9780 }}
         zoom={19}
       />

@@ -17,7 +17,7 @@ export interface ISelector {
   length: number,
 }
 
-export const Selector = ({ data, onClick }: { data: ISelector, onClick: () => {} }) => {
+export const Selector = ({ data }: { data: ISelector }) => {
   const [durationWalkStringState, setDurationWalkStringState] = useState<string>()
   const [durationCycleStringState, setDurationCycleStringState] = useState<string>()
 
@@ -72,7 +72,7 @@ export const Selector = ({ data, onClick }: { data: ISelector, onClick: () => {}
               </tr>
             </tbody>
           </table>
-          <button onClick={onClick}>Start</button>
+          <button >Start</button>
         </div>
       </div>
     </>

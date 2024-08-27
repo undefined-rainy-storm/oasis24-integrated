@@ -128,3 +128,11 @@ export class NaverMap extends LitElement {
     this.mapState?.setCenter(new naver.maps.LatLng(coords.lat, coords.lng))
   }
 }
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements extends HTMLElement {
+      'naver-map': NaverMap
+    }
+  }
+}
