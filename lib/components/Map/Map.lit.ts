@@ -11,7 +11,7 @@ export class NaverMap extends LitElement {
   @property({ type: Object }) center?: Position
   @property({ type: Number }) zoom: number = MAP_WRAPPER_POLYFILL_NAVER_INIT_ZOOM
   @property({ type: Object }) wrapperStyle?: Object
-  @property({ type: Function }) onReady?: () => void
+  @property({ type: Function }) onReady?: () => {}
 
   @state() private mapState?: naver.maps.Map
   @state() private pathState: {[key: string]: naver.maps.Polyline} = {}
@@ -36,7 +36,7 @@ export class NaverMap extends LitElement {
   render() {
     return html`
       <div
-        style='width: 500px; height: 800px; display: block'
+        style='width: 100vw; height: 100vh; display: block'
         id=${this.wrapperId}
       ></div>
     `
@@ -62,9 +62,13 @@ export class NaverMap extends LitElement {
         zoom: this.zoom
       }
     )
-    if (this.onReady) {
+    const event = new CustomEvent('init-done', {
+      bubbles: true
+    })
+    this.dispatchEvent(event)
+    /*if (this.onReady) {
       this.onReady()
-    }
+    }*/
   }
 
   private getCurrentPosition() {
